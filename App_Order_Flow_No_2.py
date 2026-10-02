@@ -13,7 +13,7 @@ from PIL import Image
 # Page Title
 ############################
 
-image = Image.open("mon_image.png")
+image = Image.open("ChatGPT Image 2 oct. 2026, 01_10_39.png")
 
 st.image(image, use_container_width=True)
 
