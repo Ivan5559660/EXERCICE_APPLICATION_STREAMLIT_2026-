@@ -29,6 +29,8 @@ def load_data(year):
     return playerstats
 # Chargement des donnees selon l'annee selectionnee
 playerstats= load_data(selected_year)
+# Detection automatique de la colonne d'equipe ('Tm' ou 'Team')
+team_column='Tm' if 'Tm' in playerstats.columns else 'Team'
 # Sidebar - Team selection
 sorted_unique_team = sorted(playerstats['Tm'].unique()) # Récupère la liste de toutes les équipes uniques (Tm) présentées dans le jeu de données playerstats, puis les trie par ordre alphabétique.
 # selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team[:1]) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
