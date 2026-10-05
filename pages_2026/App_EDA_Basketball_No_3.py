@@ -17,7 +17,7 @@ st.sidebar.header('User Input Features') # Permet d'afficher un sous titre de se
 selected_year=st.sidebar.selectbox('Year', list(reversed(range(2000, 2024)))) # Permet de creer un menu deroulant d'options dans la barre laterale. De plus, list(reversed(range(1950, 2024))) 
 
 # Web scraping of NBA player stats
-@st.cache # Un décorateur Streamlit qui met en cache le résultat de la fonction load_data. Cela évite de recharger et de re-télécharger les données du site web à chaque fois que l'utilisateur interagit avec l'application, ce qui améliore fortement les performances.
+@st.cache_data # Un décorateur Streamlit qui met en cache le résultat de la fonction load_data. Cela évite de recharger et de re-télécharger les données du site web à chaque fois que l'utilisateur interagit avec l'application, ce qui améliore fortement les performances.
 def load_data(year):
     url="https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_game.html"
     html=pd.read_html(url, header=0) # Utilisation de Pandas pour lire et extraire tous les tableaux HTML trouvés à l'URL spécifiée. L'argument header=0 indique que la première ligne du tableau contient les en-têtes de colonnes.
