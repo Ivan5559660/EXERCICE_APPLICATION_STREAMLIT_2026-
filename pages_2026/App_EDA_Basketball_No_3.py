@@ -42,8 +42,7 @@ unique_pos = ['C','PF','SF','PG','SG'] # Définit une liste contenant les abrév
 selected_pos = st.sidebar.multiselect('Position', unique_pos, unique_pos) # Crée un second menu à choix multiples dans la barre latérale intitulé 'Position'. Par défaut, toutes les positions sont sélectionnées.
 
 # Filtering data(Filtrage des donnees)
-df_selected_team = playerstats[(playerstats.Tm.isin(selected_team)) & (playerstats.Pos.isin(selected_pos))] # Filtre le DataFrame principal playerstats en ne conservant que les lignes où l'équipe (Tm) figure parmi les équipes choisies (selected_team) ET la position (Pos) figure parmi celles choisies (selected_pos). Le résultat filtré est enregistré dans df_selected_team.
-
+df_selected_team = playerstats[(playerstats[team_column].isin(selected_team)) & (playerstats['Pos'].isin(selected_pos))]
 # Affichage des resultats(display)
 st.header('Display Player Stats of Selected Team(s)') # Affiche un titre de section (Header) sur la page principale
 st.write('Data Dimension: ' + str(df_selected_team.shape[0]) + ' rows and ' + str(df_selected_team.shape[1]) + ' columns.') # Affiche un titre de section (Header) sur la page principale
