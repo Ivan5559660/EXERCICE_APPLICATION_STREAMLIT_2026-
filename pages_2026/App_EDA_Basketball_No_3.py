@@ -14,7 +14,7 @@ This app performs simple webscraping of NBA player stats data!
 """) # Permet d'afficher du texte formate en utilisant le langage Markdown
 
 st.sidebar.header('User Input Features') # Permet d'afficher un sous titre de section a l'interieur du panneau lateral situe a gauche de l'ecran
-selected_year=st.sidebar_selectbox('Year', list(reversed())) # Permet de creer un menu deroulant d'options dans la barre laterale. De plus, list(reversed(range(1950, 2024))) 
+selected_year=st.sidebar_selectbox('Year', list(reversed(range(2000, 2024)))) # Permet de creer un menu deroulant d'options dans la barre laterale. De plus, list(reversed(range(1950, 2024))) 
 
 # Web scraping of NBA player stats
 @st.cache # Un décorateur Streamlit qui met en cache le résultat de la fonction load_data. Cela évite de recharger et de re-télécharger les données du site web à chaque fois que l'utilisateur interagit avec l'application, ce qui améliore fortement les performances.
