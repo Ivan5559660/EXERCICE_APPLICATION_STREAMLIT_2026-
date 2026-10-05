@@ -30,7 +30,7 @@ def load_data(year):
 # Chargement des donnees selon l'annee selectionnee
 playerstats= load_data(selected_year)
 # Sidebar - Team selection
-sorted_unique_team = sorted(playerstats['Tm']unique()) # Récupère la liste de toutes les équipes uniques (Tm) présentées dans le jeu de données playerstats, puis les trie par ordre alphabétique.
+sorted_unique_team = sorted(playerstats['Tm'].unique()) # Récupère la liste de toutes les équipes uniques (Tm) présentées dans le jeu de données playerstats, puis les trie par ordre alphabétique.
 # selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team[:1]) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
 # selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team[:2]) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
