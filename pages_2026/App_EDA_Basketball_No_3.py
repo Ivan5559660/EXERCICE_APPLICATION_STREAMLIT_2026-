@@ -24,17 +24,17 @@ def load_data(year):
     df=html[0] # Sélection du premier tableau extrait de la page web (index 0) et stockage de celui-ci dans la variable DataFrame df
     raw= df.drop(df[df.Age=='Age'].index) # Suppression des lignes d'en-tête répétées au milieu du tableau web. En supprimant les lignes où la colonne Age a pour valeur la chaîne 'Age', on nettoie les doublons d'en-têtes présentés périodiquement sur le site.
     # Suppression de la colonne de rang (Rk, ou RK)
-    playerstats=raw.drop(['RK', 'RK'], axis=1, errors='ignore') # Suppression de la colonne nommé 'Rk' (Rang / Rank) du DataFrame, car l'argument axis=1 spécifie qu'il s'agit d'une colonne.
+    playerstats=raw.drop(['Rk', 'RK'], axis=1, errors='ignore').fillna(0) # Suppression de la colonne nommé 'Rk' (Rang / Rank) du DataFrame, car l'argument axis=1 spécifie qu'il s'agit d'une colonne.
     playerstats= playerstats.fillna(0)
+    # Nettoyage des noms des colonnes
+    playerstats.columns=[str(c).strip() for c in playerstats.columns]
     return playerstats
 # Chargement des donnees selon l'annee selectionnee
 playerstats= load_data(selected_year)
 # Detection automatique de la colonne d'equipe ('Tm' ou 'Team')
 team_column='Tm' if 'Tm' in playerstats.columns else 'Team'
 # Sidebar - Team selection
-sorted_unique_team = sorted(playerstats['Tm'].unique()) # Récupère la liste de toutes les équipes uniques (Tm) présentées dans le jeu de données playerstats, puis les trie par ordre alphabétique.
-# selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team[:1]) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
-# selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team[:2]) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
+sorted_unique_team=sorted(playerstats[team_column].unique().astype(str))
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team) # Crée un menu déroulant à choix multiples dans la barre latérale Streamlit avec le titre 'Team'. Le deuxième argument définit les options sélectionnables (sorted_unique_team), et le troisième indique que toutes les équipes sont sélectionnées par défaut.
 
 # Sidebar - Position selection
