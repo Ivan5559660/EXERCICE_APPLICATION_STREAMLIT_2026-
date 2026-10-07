@@ -15,7 +15,7 @@ plt.style.use('ggplot')
 import yfinance as yf
 import streamlit as st
 # Importation des donnees financieres au format csv
-Chemin_Fichier=pd.read_csv("rwanda_pe_dealflow_cleaned.csv")
+Chemin_Fichier=pd.read_csv(r"rwanda_pe_dealflow_cleaned.csv")
 df_Origine=pd.read_csv(Chemin_Fichier, sep=';')
 
 # 2. Nettoyer les guillemets superflus dans les valeurs textuelles en creant une boucle for:
