@@ -76,52 +76,24 @@ Executive dashboard dedicated to performance analysis of Rwandan SME portfolios.
 (EBITDA, IRR, profitability ratios) and multi-sector time-series monitoring
 """) # Permet d'afficher du texte formate en utilisant le langage Markdown
 
-# INJECTION CSS POUR LE FOND ET LE STYLE
+# 1. Fond en arrière-plan uniquement
 st.markdown("""
     <style>
-    /* Fond principal de l'application avec un dégradé subtil */
     .stApp {
         background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
         color: #f8fafc;
     }
-    
-    /* Style de la carte d'en-tête */
-    .header-card {
-        background-color: rgba(30, 41, 59, 0.7);
-        padding: 2.5rem;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        margin-bottom: 2rem;
-        backdrop-filter: blur(8px);
-    }
-    
-    .header-title {
-        color: #ffffff;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        margin-bottom: 0.75rem;
-    }
-    
-    .header-subtitle {
-        color: #94a3b8;
-        font-size: 1.05rem;
-        line-height: 1.6;
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# Contenu de l'en-tête dans une structure stylisée
+# 2. Vos fonctions Streamlit natives conservées
+st.title("RWANDA PE DEALFLOW EXPLORER")
+
 st.markdown("""
-    <div class="header-card">
-        <h1 class="header-title">RWANDA PE DEALFLOW EXPLORER</h1>
-        <p class="header-subtitle">
-            Executive dashboard dedicated to performance analysis of Rwandan SME portfolios. 
-            This platform centralizes the tracking of key financial metrics (EBITDA, IRR, profitability ratios) 
-            and multi-sector time-series monitoring.
-        </p>
-    </div>
-""", unsafe_allow_html=True)
+Executive dashboard dedicated to performance analysis of Rwandan SME portfolios. 
+This platform centralizes the tracking of key financial metrics (EBITDA, IRR, profitability ratios) 
+and multi-sector time-series monitoring.
+""")
 
 
 
