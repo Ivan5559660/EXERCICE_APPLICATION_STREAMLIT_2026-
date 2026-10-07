@@ -72,4 +72,4 @@ if st.button('Intercorrelation Heatmap'): # Crée un bouton dans l'interface int
     with sns.axes_style("white"): # Configure un fond blanc
         f, ax = plt.subplots(figsize=(7, 5)) # initialise une figure Matplotlib de dimensions 7x5 pouces
         ax = sns.heatmap(corr, mask=mask, vmax=1, square=True) # puis dessine la matrice de corrélation à l'aide de Seaborn (sns.heatmap) en appliquant le masque et en fixant la valeur maximale de corrélation à 1.
-    st.pyplot() # Affiche le graphique Matplotlib/Seaborn ainsi généré directement sur l'interface de l'application Streamlit.
+    st.pyplot(f) # Affiche le graphique Matplotlib/Seaborn ainsi généré directement sur l'interface de l'application Streamlit.
