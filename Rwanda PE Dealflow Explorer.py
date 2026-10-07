@@ -16,7 +16,7 @@ import yfinance as yf
 import streamlit as st
 # Importation des donnees financieres au format csv
 df_Origine = pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
-
+'''
 # 2. Nettoyer les guillemets superflus dans les valeurs textuelles en creant une boucle for:
 for col in df_Origine.select_dtypes(include=['str', 'object']).columns:
     df_Origine[col]=df_Origine[col].astype(str).str.replace('"', '').str.strip()
@@ -65,6 +65,7 @@ Final_Data_Project.to_csv('Rwanda_Pe_DealFlow_Cleaned.csv', index=False)
 print("Nettoyage termine ! Fichier 'Rwanda_Pe_DealFlow_Cleaned.csv' cree avec succes")
 
 Final_Data_Project
+'''
 
 # 7. Titre principale en en-tete
 st.title('RWANDA PE DEALFLOW EXPLORER') # Afficher le titre principale de mon application en tres grands caracteres au sommet de la page centrale
