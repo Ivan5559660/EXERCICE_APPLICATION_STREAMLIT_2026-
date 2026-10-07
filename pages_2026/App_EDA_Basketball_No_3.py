@@ -65,7 +65,8 @@ if st.button('Intercorrelation Heatmap'): # Crée un bouton dans l'interface int
     df_selected_team.to_csv('output.csv',index=False) # Sauvegarde le DataFrame filtré dans un fichier local 'output.csv', puis le re-télécharge dans df. (Cette étape permet de s'assurer que toutes les colonnes sont relues avec les types de données appropriés pour la matrice de corrélation).
     df = pd.read_csv('output.csv') 
 
-    corr = df.corr() # Calcule la matrice de corrélation de Pearson entre toutes les colonnes numériques du DataFrame.
+    df_numeric=df.selecte_dtypes(include=['float64','int64']) # Filtrage explicite des colonnes avant calcul de correlation
+    corr = df_numeric.corr() # Calcule la matrice de corrélation de Pearson entre toutes les colonnes numériques du DataFrame.
     mask = np.zeros_like(corr) # Génère un masque booléen pour masquer le triangle supérieur de la matrice de corrélation (car la matrice est symétrique), afin d'éviter la répétition des informations sur le graphique.
     mask[np.triu_indices_from(mask)] = True # Génère un masque booléen pour masquer le triangle supérieur de la matrice de corrélation (car la matrice est symétrique), afin d'éviter la répétition des informations sur le graphique.
     with sns.axes_style("white"): # Configure un fond blanc
