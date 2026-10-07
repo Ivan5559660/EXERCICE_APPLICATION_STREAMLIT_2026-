@@ -67,15 +67,6 @@ df_Origine = pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
 
 #Final_Data_Project
 
-
-# 7. Titre principale en en-tete
-st.title('RWANDA PE DEALFLOW EXPLORER') # Afficher le titre principale de mon application en tres grands caracteres au sommet de la page centrale
-# 8. Commentaire du projet en dessous de l'en-tete
-st.markdown("""
-Executive dashboard dedicated to performance analysis of Rwandan SME portfolios. This platform centralizes the tracking of key financial metrics 
-(EBITDA, IRR, profitability ratios) and multi-sector time-series monitoring
-""") # Permet d'afficher du texte formate en utilisant le langage Markdown
-
 # 1. Fond en arrière-plan uniquement
 st.markdown("""
     <style>
