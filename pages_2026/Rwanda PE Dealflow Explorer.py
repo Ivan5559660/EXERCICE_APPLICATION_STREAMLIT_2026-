@@ -90,7 +90,7 @@ filtre_ESG= st.sidebar.multiselect(
 # --- Application des filtres sur le DataFrame
 DF_Filtre= df_Origine.copy() #
 
-if Col_Lociation in DF_Filtre.columns and filtre_Location:
+if Col_Location in DF_Filtre.columns and filtre_Location:
     DF_Filtre=DF_Filtre[DF_Filtre[Col_Location].isin(filtre_Location)]
 
 if Col_Stage in DF_Filtre.columns and filtre_stage:
