@@ -14,7 +14,7 @@ import streamlit as st
 st.set_page_config(
     page_title="RWANDA PE DEALFLOW EXPLORER",
     page_icon="RW",
-    layout="Wide"
+    layout="wide"
 ) # 
 
 # Injection du style CSS personnalise
