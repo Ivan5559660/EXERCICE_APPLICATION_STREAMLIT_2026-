@@ -79,7 +79,7 @@ filtre_stage= st.sidebar.multiselect(
 )
 
 # --- Filtre 3: Criteres ESG
-option_ESG=df_origine[Col_ESG].dropna().unique().tolist() if Col_ESG in df_Origine.columns else []
+option_ESG=df_Origine[Col_ESG].dropna().unique().tolist() if Col_ESG in df_Origine.columns else []
 filtre_ESG= st.sidebar.multiselect(
                 label="ESG Score:",
                 options="option_ESG",
