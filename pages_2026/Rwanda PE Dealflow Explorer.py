@@ -66,7 +66,7 @@ Col_EBITDA="EBITDA_RWF_M"
 Option_Location= df_Origine[Col_Location].dropna().unique().tolist() if Col_Location in df_Origine.columns else[]
 filtre_Location= st.sidebar.multiselect(
                     label="Location/District:",
-                    Options=Option_Location,
+                    options=Option_Location,
                     default=Option_Location
 )
 
