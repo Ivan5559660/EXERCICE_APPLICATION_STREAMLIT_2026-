@@ -108,27 +108,34 @@ col1, col2, col3, col4= st.columns(4)
 
 with col1:
     st.metric(
-            label="Selected Companies", value=len(DF_Filtre))
+        label="Selected Companies", 
+        value=len(DF_Filtre) if not DF_Filtre.empty else 0
+    )
 
 with col2:
     if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
         EBITDA_Moyen= DF_Filtre[Col_EBITDA].mean()
         st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen:, .0f} $")
-    else:
-        st.metric(label="EBITDA Moyen", value="N/A")
+
+        #Verification si la moyenne est valide(non NaN):
+        if pd.notna(EBITDA_Moyen):
+            st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen: , .0f} $")
+        else:
+            st.metric(label="EBITDA Moyen", value="N/A")
 
 with col3:
     if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
-        ebitda_total=DF_Filtre[Col_EBITDA].sum()
-        st.metric(label="EBITDA Cumule", value=f"{ebitda_total:,.0f} $")
+        val = DF_Filtre[Col_EBITDA].sum()
+        st.metric(label="EBITDA Cumulé", value=f"{val:,.0f} $" if pd.notna(val) else "N/A")
     else:
-        st.metric(label="EBITDA Cumule", value="N/A")
+        st.metric(label="EBITDA Cumulé", value="N/A")
+        
 with col4:
     if Col_Location in DF_Filtre.columns and not DF_Filtre.empty:
-        nb_villes = DF_Filtre[Col_Location].nunique()
-        st.metric(label="Zones Couvertes", value=nb_villes)
+        val = DF_Filtre[Col_Location].nunique()
+        st.metric(label="Zones Couvertes", value=val)
     else:
-        st.metric(label="Zones Couvertes", value="0")
+        st.metric(label="Zones Couvertes", value=0)
 
 st.markdown("---")
 
