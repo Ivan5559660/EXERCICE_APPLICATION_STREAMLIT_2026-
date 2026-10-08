@@ -88,16 +88,21 @@ filtre_ESG= st.sidebar.multiselect(
 )
 
 # --- Application des filtres sur le DataFrame
-DF_Filtre= df_Origine.copy() #
 
-if Col_Location in DF_Filtre.columns and filtre_Location:
-    DF_Filtre=DF_Filtre[DF_Filtre[Col_Location].isin(filtre_Location)]
+# Copie initiale des données
+DF_Filtre = df_Origine.copy()
 
-if Col_Stage in DF_Filtre.columns and filtre_stage:
-    DF_Filtre=DF_Filtre[DF_Filtre[Col_ESG].isin(filtre_stage)]  
+# 1. Filtre Location
+if filtre_Location:
+    DF_Filtre = DF_Filtre[DF_Filtre[Col_Location].astype(str).isin([str(x) for x in filtre_Location])]
 
-if Col_ESG in DF_Filtre.columns and filtre_ESG:
-    DF_Filtre=DF_Filtre[DF_Filtre[Col_ESG].isin(filtre_ESG)]
+# 2. Filtre Stage
+if filtre_Stage:
+    DF_Filtre = DF_Filtre[DF_Filtre[Col_Stage].astype(str).isin([str(x) for x in filtre_Stage])]
+
+# 3. Filtre ESG
+if filtre_ESG:
+    DF_Filtre = DF_Filtre[DF_Filtre[Col_ESG].astype(str).isin([str(x) for x in filtre_ESG])]
 
 
 
