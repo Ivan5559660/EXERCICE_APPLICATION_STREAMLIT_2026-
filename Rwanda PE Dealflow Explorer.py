@@ -44,9 +44,10 @@ st.divider()
 #===============================================================================
 @st.cache_data #
 def load_data():
-    # Chargement du fichier CSV nettoye
-    df_Origine=pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
-    return df_Origine
+    # Chargement du fichier CSV depuis la racine ou le dossier
+    return pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
+# Appel de la fonction pour creer la variable globale
+df_Origine= load_data()
 
 
 # ==============================================================================
@@ -64,7 +65,7 @@ Col_EBITDA="EBITDA_RWF_M"
 Option_Location= df_Origine[Col_Location].dropna().unique().tolist() if Col_Location in df_Origine.columns else[]
 filtre_Location= st.sidebar.multiselect(
                     label="Location/District:",
-                    Options=Option_Location,
+                    options=Option_Location,
                     default=Option_Location
 )
 
