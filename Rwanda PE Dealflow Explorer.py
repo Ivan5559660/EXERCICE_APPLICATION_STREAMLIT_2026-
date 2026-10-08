@@ -124,8 +124,8 @@ with col3:
     else:
         st.metric(label="EBITDA Cumule", value="N/A")
 with col4:
-    if Col_Location in df_filtre.columns and not df_filtre.empty:
-        nb_villes = df_filtre[Col_Location].nunique()
+    if Col_Location in DF_Filtre.columns and not DF_Filtre.empty:
+        nb_villes = DF_Filtre[Col_Location].nunique()
         st.metric(label="Zones Couvertes", value=nb_villes)
     else:
         st.metric(label="Zones Couvertes", value="0")
