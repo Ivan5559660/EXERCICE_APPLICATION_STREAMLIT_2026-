@@ -45,9 +45,10 @@ st.divider()
 #===============================================================================
 @st.cache_data #
 def load_data():
-    # Chargement du fichier CSV nettoye
-    df_Origine=pd.read_csv("C:\Users\hp\OneDrive\Documents\VSCODE_WORKING_2026\EXERCICES_APPS_2026\pages_2026\Rwanda_Pe_DealFlow_Cleaned.csv")
-    return df_Origine
+    # Chargement du fichier CSV depuis la racine ou le dossier
+    return pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
+# Appel de la fonction pour creer la variable globale
+df_Origine= load_data()
 
 
 # ==============================================================================
