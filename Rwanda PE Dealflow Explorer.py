@@ -145,10 +145,7 @@ col1, col2, col3, col4- st.columns(4)
 
 with col1:
     st.metric(
-            label="Selected Companies"
-            value=len(DF_Filtre)
-
-    )
+            label="Selected Companies", value=len(DF_Filtre))
 
 with col2:
     if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
