@@ -118,6 +118,13 @@ with col2:
     if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
         EBITDA_Moyen= DF_Filtre[Col_EBITDA].mean()
         st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen:, .0f} $")
+
+        #Verification si la moyenne est valide(non NaN):
+        if pd.notna(EBITDA_Moyen):
+            st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen: , .0f} $")
+        else:
+            st.metric(label="EBITDA Moyen", value="N/A")
+                
     else:
         st.metric(label="EBITDA Moyen", value="N/A")
 
