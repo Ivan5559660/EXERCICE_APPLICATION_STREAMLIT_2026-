@@ -45,84 +45,135 @@ plt.style.use('ggplot')
 import yfinance as yf
 import streamlit as st
 # Importation des donnees financieres au format csv
-df_Origine = pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
 
-# 2. Nettoyer les guillemets superflus dans les valeurs textuelles en creant une boucle for:
-# for col in df_Origine.select_dtypes(include=['str', 'object']).columns:
-    #df_Origine[col]=df_Origine[col].astype(str).str.replace('"', '').str.strip()
+# ===========================================================================
+# 1. CONFIGURATION DE LA PAGE ET STYLE CUSTOM (CSS)
+# ===========================================================================
+st.set_page_config(
+    page_title="RWANDA PE DEALFLOW EXPLORER",
+    page_icon="RW"
+    layout="Wide"
+) # 
 
-# 3.1. Anonymisation et adaptation aux PME Rwandaises en creant une liste
-#Companies_Rwanda=['Kigali AgriTech','Kivu Green Energy','Huye Tech Hub','Gicumbi Dairy','Nyarugenge Hydro Power','Musanze Food Processing','Bugesera Housing Corp','Kigali Health Partners','Akagera Express','Rwamagana Solar Ltd','Rubavu Eco-Lodge','Nyamata Textile']
-
-# 3.2. Creation de dictionnaire
-#Mapping_Secteurs={
-    #'Management':'Fintech & ICT',
-    #'Technician':'Renewable Energy',
-    #'Blue-Collar':'Manufacturing',
-    #'Admin':'Real Estate',
-    #'Services':'Hospitality & Tourism',
-    #'Retired':'AgriBusiness',
-    #'Self-Employed':'Healthcare',
-    #'Entrepreneur':'Logistics & Trade',
-    #'Unemployed':'Education',
-    #'Housemaid':'Retail & FMCG',
-    #'Student':'CleanTech',
-    #'Unknown':'Diversified Services'
-
-# 3.3. Creation de liste pour ville du Rwanda et etapes d'investissement:
-#Cities_Rwanda=['Kigali','Musanze','Rubavu','Huye','Rwamagana','Bugesera']
-#Investment_Stage=['Seed','Series A','Growth Equity','Buyout']
-
-# 4. Remplacement et renommage des colonnes
-#df_Origine['Company_Name']=[Companies_Rwanda[i % len(Companies_Rwanda)] for i in range(len(df_Origine))]
-#df_Origine['Sector']=df_Origine['job'].map(Mapping_Secteurs).fillna('Other')
-#df_Origine['Location']=np.random.choice(Cities_Rwanda, size=len(df_Origine))
-#df_Origine['INVESTMENT_STAGE']=np.random.choice(Investment_Stage, size=len(df_Origine))
-
-# Reprise des colonnes chiffrees existantes
-#df_Origine['Years_in_Operation']=df_Origine['age']
-#df_Origine['EBITDA_RWF_M']=df_Origine['balance'].apply(lambda x: abs(x) + 100 ) # Rendu positif 
-#df_Origine['IRR_Target_%']=np.round((df_Origine['duration']/10).clip(10, 35), 2)
-#df_Origine['ESG_Score']=np.random.randint(65, 99, size=len(df_Origine))
-
-# 5. Selection et conservation des colonnes finales nettoyees en creant une liste
-#Colonnes_Finales=['Company_Name','Sector','Location','INVESTMENT_STAGE','Years_in_Operation','EBITDA_RWF_M','IRR_Target_%','ESG_Score']
-
-#Final_Data_Project= df_Origine[Colonnes_Finales]
-
-# 6. Sauvegarde du fichier propre dans le dossier actuel
-
-#Final_Data_Project.to_csv('Rwanda_Pe_DealFlow_Cleaned.csv', index=False)
-#print("Nettoyage termine ! Fichier 'Rwanda_Pe_DealFlow_Cleaned.csv' cree avec succes")
-
-#Final_Data_Project
-
-# 1. Fond en arrière-plan uniquement
-
+# Injection du style CSS personnalise
 st.markdown("""
-    <style>
-    .stApp {
-        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
-        color: #f8fafc;
-    }
-    </style>
-""", unsafe_allow_html=True)
+        <style>
+        .stApp {
+        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%); 
+        color: #f8fafc;} </style> """, unsafe_allow_html=True)
 
-# 2. Vos fonctions Streamlit natives conservées
+# =============================================================================
+# 2. EN-TETE ET DESCRIPTION 
+# =============================================================================
 st.title("RWANDA PE DEALFLOW EXPLORER")
 
 st.markdown("""
-Executive dashboard dedicated to performance analysis of Rwandan SME portfolios. 
-This platform centralizes the tracking of key financial metrics (EBITDA, IRR, profitability ratios) 
-and multi-sector time-series monitoring.
-""")
+            Executive dashboard dedicated to performance analysis of Rwandan SME portfolios.
+            This platform centralizes the tracking of key financial metrics (EBITDA, IRR, profitability ratios)
+            and multi-sector time-series monitoring.
+            """
+)
 
-# Renvoyer la liste des elements choisis par l'utilisateur
-
-
-
+st.divider()
 
 
+# ==============================================================================
+# 3. CHARGEMENT ET PRESENTATION DES DONNEES
+#===============================================================================
+@st.cache_data #
+def load_data():
+    # Chargement du fichier CSV nettoye
+    df_Origine=pd.read_csv("C:\Users\hp\OneDrive\Documents\VSCODE_WORKING_2026\EXERCICES_APPS_2026\pages_2026\Rwanda_Pe_DealFlow_Cleaned.csv")
+    return df_Origine
 
 
-# %%
+# ==============================================================================
+# 4. BARRE LATERALE (SIDEBAR) _ FILTRES MULTISELECT
+# ==============================================================================
+st.sidebar.header("Filtres de Recherche")
+
+# Remplacer les noms entre guillemets par le nom exact des colonnes dans le CSV
+Col_Location="Location"
+Col_Stage="INVESTMENT_STAGE"
+Col_ESG="ESG_Score"
+Col_EBITDA="EBITDA_RWF_M"
+
+# --- Filtre 1: Location
+Option_Location= df_Origine[Col_Location].dropna().unique().tolist() if Col_Location in df_Origine.columns else[]
+filtre_Location= st.sidebar.multiselect(
+                    label="Location/District:",
+                    Options=Option_Location,
+                    default=Option_Location
+)
+
+# --- Filtre 2: Etape d'investissement
+Option_stage=df_Origine[Col_Stage].dropna().unique().tolist() if Col_Stage in df_Origine.columns else []
+filtre_stage= st.sidebar.multiselect(
+                label="Investment Stage:",
+                options=Option_stage,
+                default=Option_stage
+
+)
+
+# --- Filtre 3: Criteres ESG
+option_ESG=df_origine[Col_ESG].dropna().unique().tolist() if Col_ESG in df_Origine.columns else []
+filtre_ESG= st.sidebar.multiselect(
+                label="ESG Score:",
+                options="option_ESG",
+                default="option_ESG"
+)
+
+# --- Application des filtres sur le DataFrame
+DF_Filtre= df_Origine.copy() #
+
+if Col_Lociation in DF_Filtre.columns and filtre_Location:
+    DF_Filtre=DF_Filtre[DF_Filtre[Col_Location].isin(filtre_Location)]
+
+if Col_Stage in DF_Filtre.columns and filtre_stage:
+    DF_Filtre=DF_Filtre[DF_Filtre[Col_ESG].isin(filtre_stage)]  
+
+if Col_ESG in DF_Filtre.columns and filtre_ESG:
+    DF_Filtre=DF_Filtre[DF_Filtre[Col_ESG].isin(filtre_ESG)]
+
+
+
+# ==============================================================================
+# 5. AFFICHAGE DES METRIQUES CLES ET RESULTATS
+# ==============================================================================
+st.subheader("Metrique Cles du Portfolio") 
+col1, col2, col3, col4- st.columns(4)
+
+with col1:
+    st.metric(
+            label="Selected Companies"
+            value=len(DF_Filtre)
+
+    )
+
+with col2:
+    if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
+        EBITDA_Moyen= DF_Filtre[Col_EBITDA].mean()
+        st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen:, .0f} $")
+    else:
+        st.metric(label="EBITDA Moyen", value="N/A")
+
+with col3:
+    if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
+        ebitda_total=DF_Filtre[Col_EBITDA].sum()
+        st.metric(label="EBITDA Cumule", value=f"{ebitda_total:,.0f} $")
+    else:
+        st.metric(label="EBITDA Cumule", value="N/A")
+with col4:
+    if COL_EMPLACEMENT in df_filtre.columns and not df_filtre.empty:
+        nb_villes = df_filtre[COL_EMPLACEMENT].nunique()
+        st.metric(label="Zones Couvertes", value=nb_villes)
+    else:
+        st.metric(label="Zones Couvertes", value="0")
+
+st.markdown("---")
+
+# Affichage du tableau de donnees filtres
+st.subheader("Liste des Opportunites")
+st.dataframe(DF_Filtre, use_container_width=True)
+
+
