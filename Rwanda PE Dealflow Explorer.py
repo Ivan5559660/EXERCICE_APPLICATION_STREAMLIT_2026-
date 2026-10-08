@@ -51,7 +51,7 @@ import streamlit as st
 # ===========================================================================
 st.set_page_config(
     page_title="RWANDA PE DEALFLOW EXPLORER",
-    page_icon="RW"
+    page_icon="RW",
     layout="Wide"
 ) # 
 
