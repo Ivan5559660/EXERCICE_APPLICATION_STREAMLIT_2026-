@@ -1,11 +1,41 @@
 '''
-1.	  TABLEAU DE BORD DE PORTEFEUILLE PME (Rwanda PE Dealflow Explorer)
+I.	  TABLEAU DE BORD DE PORTEFEUILLE PME (Rwanda PE Dealflow Explorer)
 •	Concepts réutilisés : st.sidebar.multiselect pour filtrer les entreprises par secteur (Agro-business, Fintech, Énergie) et par étape d'investissement 
 (Seed, Series A, Buyout). 
 
 •	Cas d'usage : Filtrer dynamiquement un portefeuille d'entreprises rwandaises et afficher leurs métriques clés (chiffre d'affaires, EBITDA, valorisation). 
 
+• Objectif de l'application : 
+                                - Filtrage des entreprises rwandaises par emplacement et etapes d'investissement et criteres ESG
+                                - Filtrage des entreprises rwandaises par etapes d'investissement et EBITDA
+                                - Affichage des metriques des metriques cles
+                                
 '''
+
+'''
+Filtrage dynamique d'un portefeuille d'entreprises rwandaises et affichage de leurs metriques cles.s
+1. st.sidebar.header('')
+
+
+2. st.sidebar.selectbox()
+
+
+
+
+3. st.sidebar.multiselect 
+sert à créer une liste de sélection multiple positionnée dans le menu latéral (sidebar) d'une application Streamlit. Elle permet à l'utilisateur de choisir une ou 
+plusieurs options parmi une liste proposée. Le résultat retourné par cette fonction est une liste Python contenant les éléments sélectionnés.
+
+    3.1. Pourquoi l'utiliser ?
+
+        Gestion de filtres : C'est le composant idéal pour filtrer des données (par exemple, filtrer un tableau Pandas par pays, catégorie, statut ou période).
+
+        Gain d'espace : Placer le sélecteur dans la barre latérale (st.sidebar) permet de désencombrer la zone principale de votre application et de la réserver à 
+        l'affichage des graphiques, des tableaux ou des indicateurs.
+
+
+'''
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -68,6 +98,7 @@ df_Origine = pd.read_csv("Rwanda_Pe_DealFlow_Cleaned.csv")
 #Final_Data_Project
 
 # 1. Fond en arrière-plan uniquement
+
 st.markdown("""
     <style>
     .stApp {
@@ -85,6 +116,10 @@ Executive dashboard dedicated to performance analysis of Rwandan SME portfolios.
 This platform centralizes the tracking of key financial metrics (EBITDA, IRR, profitability ratios) 
 and multi-sector time-series monitoring.
 """)
+
+# Renvoyer la liste des elements choisis par l'utilisateur
+
+
 
 
 
