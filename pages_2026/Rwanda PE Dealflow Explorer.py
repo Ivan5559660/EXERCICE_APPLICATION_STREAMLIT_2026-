@@ -105,7 +105,7 @@ if Col_ESG in DF_Filtre.columns and filtre_ESG:
 # 5. AFFICHAGE DES METRIQUES CLES ET RESULTATS
 # ==============================================================================
 st.subheader("Metrique Cles du Portfolio") 
-col1, col2, col3, col4- st.columns(4)
+col1, col2, col3, col4= st.columns(4)
 
 with col1:
     st.metric(
