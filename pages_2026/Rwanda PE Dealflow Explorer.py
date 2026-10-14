@@ -122,7 +122,7 @@ with col1:
 
 with col2:
     # Calcul de la moyenne
-    EBITDA_Moyen= DF_Filtre["EBITDA"].mean()
+    EBITDA_Moyen= DF_Filtre["EBITDA_RWF_M"].mean()
     # Verification si la valeur est valide
     if pd.isna(EBITDA_Moyen) or np.isnan(EBITBA_Moyen):
         valeur_affiche="N/A"
