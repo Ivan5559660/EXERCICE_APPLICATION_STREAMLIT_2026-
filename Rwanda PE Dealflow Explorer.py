@@ -112,7 +112,7 @@ st.subheader("Metrique Cles du Portfolio")
 col1, col2, col3, col4= st.columns(4)
 
 # S'assurer que la colonne est au format numerique
-df["EBITDA"]=pd.to_numeric(df["EBITDA"], errors="coerce")
+df_Origine["EBITDA_RWF_M"]=pd.to_numeric(df_Origine["EBITDA_RWF_M"], errors="coerce")
 
 with col1:
     st.metric(
