@@ -18,12 +18,27 @@ st.set_page_config(
 ) # 
 
 # Injection du style CSS personnalise
-st.markdown("""
-        <style>
-        .stApp {
-        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%); 
-        color: #f8fafc;} </style> """, unsafe_allow_html=True)
-
+st.markdown(
+    """
+    <style>
+    /* Forcer l'affichage de la barre d'outils supérieure (trois points, paramètres, etc.) */
+    [data-testid="stToolbar"] {
+        visibility: visible !important;
+        display: flex !important;
+    }
+    
+    /* Rendre les icônes de la barre d'outils (dont les trois points) bien blanches/claires */
+    [data-testid="stToolbar"] svg {
+        fill: #f8fafc !important;
+    }
+    
+    [data-testid="stToolbar"] button {
+        color: #f8fafc !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # =============================================================================
 # 2. EN-TETE ET DESCRIPTION 
 # =============================================================================
