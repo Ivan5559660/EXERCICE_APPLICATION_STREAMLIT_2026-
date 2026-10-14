@@ -19,12 +19,26 @@ st.set_page_config(
 ) # 
 
 # Injection du style CSS personnalise
-st.markdown("""
-        <style>
-        .stApp {
-        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%); 
-        color: #f8fafc;} </style> """, unsafe_allow_html=True)
-
+st.markdown(
+    """
+    <style>
+    /* Fond de l'application */
+    .stApp {
+        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
+        color: #f8fafc;
+    }
+    
+    /* Correction de la visibilité des métriques */
+    [data-testid="stMetricLabel"] {
+        color: #f8fafc !important;
+    }
+    [data-testid="stMetricValue"] {
+        color: #ffffff !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # =============================================================================
 # 2. EN-TETE ET DESCRIPTION 
 # =============================================================================
