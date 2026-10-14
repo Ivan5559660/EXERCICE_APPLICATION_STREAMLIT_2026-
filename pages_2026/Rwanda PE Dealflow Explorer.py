@@ -97,8 +97,8 @@ if filtre_Location:
     DF_Filtre = DF_Filtre[DF_Filtre[Col_Location].astype(str).isin([str(x) for x in filtre_Location])]
 
 # 2. Filtre Stage
-if filtre_Stage:
-    DF_Filtre = DF_Filtre[DF_Filtre[Col_Stage].astype(str).isin([str(x) for x in filtre_Stage])]
+if filtre_stage:
+    DF_Filtre = DF_Filtre[DF_Filtre[Col_Stage].astype(str).isin([str(x) for x in filtre_stage])]
 
 # 3. Filtre ESG
 if filtre_ESG:
