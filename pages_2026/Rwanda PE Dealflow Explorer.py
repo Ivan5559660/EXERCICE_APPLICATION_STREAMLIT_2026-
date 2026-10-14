@@ -22,18 +22,19 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Fond de l'application */
-    .stApp {
-        background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
-        color: #f8fafc;
+    /* Forcer l'affichage de la barre d'outils supérieure (trois points, paramètres, etc.) */
+    [data-testid="stToolbar"] {
+        visibility: visible !important;
+        display: flex !important;
     }
     
-    /* Correction de la visibilité des métriques */
-    [data-testid="stMetricLabel"] {
-        color: #f8fafc !important;
+    /* Rendre les icônes de la barre d'outils (dont les trois points) bien blanches/claires */
+    [data-testid="stToolbar"] svg {
+        fill: #f8fafc !important;
     }
-    [data-testid="stMetricValue"] {
-        color: #ffffff !important;
+    
+    [data-testid="stToolbar"] button {
+        color: #f8fafc !important;
     }
     </style>
     """,
