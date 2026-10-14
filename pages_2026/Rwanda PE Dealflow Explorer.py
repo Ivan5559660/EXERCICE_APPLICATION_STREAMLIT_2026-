@@ -111,6 +111,8 @@ if filtre_ESG:
 # ==============================================================================
 st.subheader("Metrique Cles du Portfolio") 
 col1, col2, col3, col4= st.columns(4)
+# S'assurer que la colonne est au format numerique
+df["EBITDA"]=pd.to_numeric(df["EBITDA"], errors="coerce")
 
 with col1:
     st.metric(
@@ -119,18 +121,16 @@ with col1:
     )
 
 with col2:
-    if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
-        EBITDA_Moyen= DF_Filtre[Col_EBITDA].mean()
-        st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen:, .0f} $")
-
-        #Verification si la moyenne est valide(non NaN):
-        if pd.notna(EBITDA_Moyen):
-            st.metric(label="EBITDA Moyen", value=f"{EBITDA_Moyen: , .0f} $")
-        else:
-            st.metric(label="EBITDA Moyen", value="N/A")
-                
+    # Calcul de la moyenne
+    EBITDA_Moyen= DF_Filtre["EBITDA"].mean()
+    # Verification si la valeur est valide
+    if pd.isna(EBITDA_Moyen) or np.isnan(EBITBA_Moyen):
+        valeur_affiche="N/A"
     else:
-        st.metric(label="EBITDA Moyen", value="N/A")
+        valeur_affiche= f"{EBITDA_Moyen:,.0f} $"
+    st.metric(label="EBITDA Moyen", value=valeur_affiche)
+
+
 
 with col3:
     if Col_EBITDA in DF_Filtre.columns and not DF_Filtre.empty:
